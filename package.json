@@ -1,0 +1,40 @@
+{
+  "name": "pkg-uninstaller-cli",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "type": "module",
+  "bin": {
+    "pkg-uninstaller": "dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theBGuy/pkg-uninstaller-cli.git"
+  },
+  "scripts": {
+    "dev": "tsx ./index.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it"
+  },
+  "keywords": ["uninstall", "cli", "nodejs", "packages"],
+  "author": "theBGuy <thebguy.github@gmail.com>",
+  "license": "MIT",
+  "description": "A CLI tool to uninstall Node.js packages interactively",
+  "homepage": "https://github.com/theBGuy/pkg-uninstaller-cli#readme",
+  "bugs": {
+    "url": "https://github.com/theBGuy/pkg-uninstaller-cli/issues"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.0.0",
+    "inquirer": "^12.3.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@release-it/bumper": "^6.0.1",
+    "@types/node": "^22.10.3",
+    "release-it": "^17.11.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
