@@ -1,6 +1,6 @@
 {
   "name": "pkg-uninstaller-cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "./index.ts",
   "type": "module",
   "bin": {
@@ -16,7 +16,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "release-it"
   },
-  "keywords": ["uninstall", "cli", "nodejs", "packages"],
+  "keywords": [
+    "uninstall",
+    "cli",
+    "nodejs",
+    "packages"
+  ],
   "author": "theBGuy <thebguy.github@gmail.com>",
   "license": "MIT",
   "description": "A CLI tool to uninstall Node.js packages interactively",
