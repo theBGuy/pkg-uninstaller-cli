@@ -32,6 +32,12 @@ Navigate to the project directory containing your package.json file and run the 
 pkg-uninstaller uninstall
 ```
 
+You can also use the shorthand command:
+
+```bash
+pkg-u uninstall
+```
+
 You can also use the tool without installing it globally by using `npx`:
 
 ```bash
@@ -69,6 +75,13 @@ Currently, the tool has one main command:
 
 - Node.js v14.0.0 or higher
 - npm or yarn installed
+
+## Visual Studio Code Extension
+
+There is also a Visual Studio Code extension version of this project available. You can find it at:
+
+- GitHub: https://github.com/theBGuy/vs-pkg-uninstaller
+- Visual Studio Marketplace: https://marketplace.visualstudio.com/items?itemName=theBGuy.pkguninstaller
 
 ## How It Works
 

@@ -4,7 +4,8 @@
   "main": "./index.ts",
   "type": "module",
   "bin": {
-    "pkg-uninstaller": "dist/index.js"
+    "pkg-uninstaller": "dist/index.js",
+    "pkg-u": "dist/index.js"
   },
   "repository": {
     "type": "git",
