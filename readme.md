@@ -1,4 +1,5 @@
 # Pkg-Uninstaller CLI
+![NPM Downloads](https://img.shields.io/npm/d18m/pkg-uninstaller-cli)
 
 A lightweight and interactive CLI tool for uninstalling Node.js packages in bulk directly from your `package.json`.
 
