@@ -14,7 +14,6 @@
   "scripts": {
     "dev": "tsx ./index.ts",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "release": "release-it"
   },
   "keywords": [
@@ -27,6 +26,10 @@
   "license": "MIT",
   "description": "A CLI tool to uninstall Node.js packages interactively",
   "homepage": "https://github.com/theBGuy/pkg-uninstaller-cli#readme",
+  "funding": {
+    "type": "individual",
+    "url": "https://buymeacoffee.com/thebguy"
+  },
   "bugs": {
     "url": "https://github.com/theBGuy/pkg-uninstaller-cli/issues"
   },

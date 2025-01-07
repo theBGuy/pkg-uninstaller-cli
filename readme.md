@@ -1,4 +1,5 @@
 # Pkg-Uninstaller CLI
+
 ![NPM Downloads](https://img.shields.io/npm/d18m/pkg-uninstaller-cli)
 
 A lightweight and interactive CLI tool for uninstalling Node.js packages in bulk directly from your `package.json`.
@@ -45,6 +46,53 @@ You can also use the tool without installing it globally by using `npx`:
 npx pkg-uninstaller-cli uninstall
 ```
 
+### Analyze Command
+
+The `analyze` command helps you identify and uninstall unused dependencies in your project.
+
+#### Usage
+
+Navigate to the project directory containing your `package.json` file and run the following command:
+
+```bash
+pkg-uninstaller analyze
+```
+
+You can also use the shorthand command:
+
+```bash
+pkg-u analyze
+```
+
+You can also use the tool without installing it globally by using `npx`:
+
+```bash
+npx pkg-uninstaller-cli analyze
+```
+
+#### Options
+
+- `-v, --verbose: Enable verbose logging for detailed output.`
+
+#### Example Workflow
+
+1. The tool analyzes your project and lists all unused dependencies.
+2. You can choose to uninstall the unused dependencies interactively.
+
+#### Example Output
+
+```bash
+$ pkg-uninstaller analyze
+The following dependencies appear to be unused:
+- @react-native-community/datetimepicker
+- @stream-io/flat-list-mvcp
+✔ Would you like to uninstall unused dependencies? Yes
+Detected package manager: npm
+Running: npm uninstall @react-native-community/datetimepicker @stream-io/flat-list-mvcp
+Successfully uninstalled: @react-native-community/datetimepicker @stream-io/flat-list-mvcp
+All batches processed.
+```
+
 ## Example Workflow
 
 1. The tool lists all installed packages (from dependencies, devDependencies, etc.).
@@ -68,9 +116,10 @@ All batches processed.
 
 ## Options
 
-Currently, the tool has one main command:
+Currently, the tool has two main commands:
 
 - `pkg-uninstaller uninstall`: Uninstall selected packages interactively.
+- `pkg-uninstaller analyze`: Analyze and identify unused dependencies in the project.
 
 ## Requirements
 
