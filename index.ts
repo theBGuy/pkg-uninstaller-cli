@@ -11,7 +11,7 @@ import { glob } from "glob";
 import inquirer from "inquirer";
 
 import { fileURLToPath } from "node:url";
-import { detectPackageManager, getPackages, isDependencyUsedTransitively } from "./utils/index.js";
+import { detectPackageManager, getPackages, isDependencyUsedTransitively, readIgnoreConfig } from "./utils/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,6 +42,7 @@ const analyzeUnusedPackages = (verbose: boolean) => {
     ...packageJson.optionalDependencies,
   };
 
+  const ignoredDependencies = new Set(readIgnoreConfig());
   const usedDependencies = new Set();
   const dependencyFileCount = new Map<string, number>();
 
@@ -61,6 +62,7 @@ const analyzeUnusedPackages = (verbose: boolean) => {
         ImportDeclaration(path: any) {
           const source = path.node.source.value;
           for (const dep of Object.keys(allDependencies)) {
+            if (ignoredDependencies.has(dep)) continue;
             if (source === dep || source.startsWith(`${dep}/`)) {
               usedDependencies.add(dep);
               dependencyFileCount.set(dep, (dependencyFileCount.get(dep) || 0) + 1);
@@ -76,6 +78,7 @@ const analyzeUnusedPackages = (verbose: boolean) => {
           ) {
             const source = path.node.arguments[0].value;
             for (const dep of Object.keys(allDependencies)) {
+              if (ignoredDependencies.has(dep)) continue;
               if (source === dep || source.startsWith(`${dep}/`)) {
                 usedDependencies.add(dep);
                 dependencyFileCount.set(dep, (dependencyFileCount.get(dep) || 0) + 1);
@@ -101,6 +104,7 @@ const analyzeUnusedPackages = (verbose: boolean) => {
   // Identify unused dependencies
   const unusedDependencies = Object.keys(packageJson.dependencies).filter((dep) => {
     if (usedDependencies.has(dep)) return false;
+    if (ignoredDependencies.has(dep)) return false;
     // if (coreDependencies.has(dep)) {
     //     console.log(chalk.yellow(`[Warning] ${dep} is core to your environment and may not appear in imports.`));
     //     return false;

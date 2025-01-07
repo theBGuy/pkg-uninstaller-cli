@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import chalk from "chalk";
 
@@ -10,6 +11,23 @@ export const detectPackageManager = () => {
     return "pnpm";
   }
   return "npm";
+};
+
+export const readIgnoreConfig = (): string[] => {
+  const localConfigPath = path.resolve(process.cwd(), ".pkg-uninstaller.json");
+  const globalConfigPath = path.resolve(os.homedir(), ".pkg-uninstaller.json");
+
+  if (fs.existsSync(localConfigPath)) {
+    const config = JSON.parse(fs.readFileSync(localConfigPath, "utf-8"));
+    return config.ignoreDependencies || [];
+  }
+
+  if (fs.existsSync(globalConfigPath)) {
+    const config = JSON.parse(fs.readFileSync(globalConfigPath, "utf-8"));
+    return config.ignoreDependencies || [];
+  }
+
+  return [];
 };
 
 export const getPackages = () => {
