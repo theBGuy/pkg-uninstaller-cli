@@ -28,6 +28,13 @@ yarn global add pkg-uninstaller-cli
 
 ## Usage
 
+Currently, the tool has two main commands:
+
+- `pkg-uninstaller uninstall`: Uninstall selected packages interactively.
+- `pkg-uninstaller analyze`: Analyze and identify unused dependencies in the project.
+
+### Uninstall Command
+
 Navigate to the project directory containing your package.json file and run the following command:
 
 ```bash
@@ -46,11 +53,28 @@ You can also use the tool without installing it globally by using `npx`:
 npx pkg-uninstaller-cli uninstall
 ```
 
+#### Example Workflow
+
+1. The tool lists all installed packages (from dependencies, devDependencies, etc.).
+2. You select multiple packages to uninstall using an interactive checkbox.
+3. The tool detects your package manager (npm or yarn) automatically.
+4. Packages are uninstalled in batches of 5 for efficiency.
+
+#### Example Output
+
+```bash
+$ pkg-uninstaller uninstall
+Detected package manager: npm
+? Select packages to uninstall: (Press <space> to select, <a> to toggle all, <i> to invert selection)
+❯◉ chalk
+ ◉ lodash
+ ◉ inquirer
+Running: npm uninstall chalk lodash inquirer
+Successfully uninstalled: chalk, lodash, inquirer
+All batches processed.
+```
+
 ### Analyze Command
-
-The `analyze` command helps you identify and uninstall unused dependencies in your project.
-
-#### Usage
 
 Navigate to the project directory containing your `package.json` file and run the following command:
 
@@ -93,33 +117,41 @@ Successfully uninstalled: @react-native-community/datetimepicker @stream-io/flat
 All batches processed.
 ```
 
-## Example Workflow
-
-1. The tool lists all installed packages (from dependencies, devDependencies, etc.).
-2. You select multiple packages to uninstall using an interactive checkbox.
-3. The tool detects your package manager (npm or yarn) automatically.
-4. Packages are uninstalled in batches of 5 for efficiency.
-
-## Example Output
-
-```bash
-$ pkg-uninstaller uninstall
-Detected package manager: npm
-? Select packages to uninstall: (Press <space> to select, <a> to toggle all, <i> to invert selection)
-❯◉ chalk
- ◉ lodash
- ◉ inquirer
-Running: npm uninstall chalk lodash inquirer
-Successfully uninstalled: chalk, lodash, inquirer
-All batches processed.
-```
-
-## Options
+<!-- ## Options
 
 Currently, the tool has two main commands:
 
 - `pkg-uninstaller uninstall`: Uninstall selected packages interactively.
-- `pkg-uninstaller analyze`: Analyze and identify unused dependencies in the project.
+- `pkg-uninstaller analyze`: Analyze and identify unused dependencies in the project. -->
+
+## Configuration File
+
+You can use a configuration file named .pkg-uninstaller.json to specify dependencies to ignore during the analysis.
+
+### Configuration Format
+
+Create a `.pkg-uninstaller.json` file in the root of your project with the following format:
+
+```json
+{
+  "ignoreDependencies": ["dependency1", "dependency2"]
+}
+```
+
+Example Configuration
+
+```json
+{
+  "ignoreDependencies": [
+    "expo-build-properties",
+    "expo-dev-client",
+    "expo-system-ui",
+    "patch-package"
+  ]
+}
+```
+
+The tool will automatically read the `.pkg-uninstaller.json` file and ignore the specified dependencies during the analysis.
 
 ## Requirements
 
