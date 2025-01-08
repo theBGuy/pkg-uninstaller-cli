@@ -1,4 +1,5 @@
 # Pkg-Uninstaller CLI
+
 ![NPM Downloads](https://img.shields.io/npm/d18m/pkg-uninstaller-cli)
 
 A lightweight and interactive CLI tool for uninstalling Node.js packages in bulk directly from your `package.json`.
@@ -27,6 +28,13 @@ yarn global add pkg-uninstaller-cli
 
 ## Usage
 
+Currently, the tool has two main commands:
+
+- `pkg-uninstaller uninstall`: Uninstall selected packages interactively.
+- `pkg-uninstaller analyze`: Analyze and identify unused dependencies in the project.
+
+### Uninstall Command
+
 Navigate to the project directory containing your package.json file and run the following command:
 
 ```bash
@@ -45,14 +53,14 @@ You can also use the tool without installing it globally by using `npx`:
 npx pkg-uninstaller-cli uninstall
 ```
 
-## Example Workflow
+#### Example Workflow
 
 1. The tool lists all installed packages (from dependencies, devDependencies, etc.).
 2. You select multiple packages to uninstall using an interactive checkbox.
 3. The tool detects your package manager (npm or yarn) automatically.
 4. Packages are uninstalled in batches of 5 for efficiency.
 
-## Example Output
+#### Example Output
 
 ```bash
 $ pkg-uninstaller uninstall
@@ -66,11 +74,84 @@ Successfully uninstalled: chalk, lodash, inquirer
 All batches processed.
 ```
 
-## Options
+### Analyze Command
 
-Currently, the tool has one main command:
+Navigate to the project directory containing your `package.json` file and run the following command:
+
+```bash
+pkg-uninstaller analyze
+```
+
+You can also use the shorthand command:
+
+```bash
+pkg-u analyze
+```
+
+You can also use the tool without installing it globally by using `npx`:
+
+```bash
+npx pkg-uninstaller-cli analyze
+```
+
+#### Options
+
+- `-v, --verbose: Enable verbose logging for detailed output.`
+
+#### Example Workflow
+
+1. The tool analyzes your project and lists all unused dependencies.
+2. You can choose to uninstall the unused dependencies interactively.
+
+#### Example Output
+
+```bash
+$ pkg-uninstaller analyze
+The following dependencies appear to be unused:
+- @react-native-community/datetimepicker
+- @stream-io/flat-list-mvcp
+✔ Would you like to uninstall unused dependencies? Yes
+Detected package manager: npm
+Running: npm uninstall @react-native-community/datetimepicker @stream-io/flat-list-mvcp
+Successfully uninstalled: @react-native-community/datetimepicker @stream-io/flat-list-mvcp
+All batches processed.
+```
+
+<!-- ## Options
+
+Currently, the tool has two main commands:
 
 - `pkg-uninstaller uninstall`: Uninstall selected packages interactively.
+- `pkg-uninstaller analyze`: Analyze and identify unused dependencies in the project. -->
+
+## Configuration File
+
+You can use a configuration file named .pkg-uninstaller.json to specify dependencies to ignore during the analysis.
+
+### Configuration Format
+
+Create a `.pkg-uninstaller.json` file in the root of your project with the following format:
+
+```json
+{
+  "ignoreDependencies": ["dependency1", "dependency2"]
+}
+```
+
+Example Configuration
+
+```json
+{
+  "ignoreDependencies": [
+    "expo-build-properties",
+    "expo-dev-client",
+    "expo-system-ui",
+    "patch-package"
+  ]
+}
+```
+
+The tool will automatically read the `.pkg-uninstaller.json` file and ignore the specified dependencies during the analysis.
 
 ## Requirements
 
